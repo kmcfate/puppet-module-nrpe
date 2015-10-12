@@ -12,7 +12,6 @@ class nrpe::params {
   }
 
   $nrpe_plugin_file_mode = '0755'
-  $nrpe_hasstatus = true
 
   case $::osfamily {
     'Debian':  {
@@ -28,6 +27,10 @@ class nrpe::params {
           $nrpe_hasstatus = false
           $nrpe_pattern   = 'nrpe'
         }
+        default: {
+          $nrpe_hasstatus = true
+          $nrpe_pattern   = $nrpe_service
+        }
       }
       $nrpe_packages    = [
         'nagios-nrpe-server',
@@ -42,6 +45,8 @@ class nrpe::params {
       $nrpe_config      = '/etc/opt/csw/nrpe.cfg'
       $nrpe_include_dir = '/etc/opt/csw/nrpe.d'
       $nrpe_service     = 'cswnrpe'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       $nrpe_packages    = [
         'nrpe',
         'nagios_plugins',
@@ -58,6 +63,8 @@ class nrpe::params {
       $nrpe_config      = '/etc/nagios/nrpe.cfg'
       $nrpe_include_dir = '/etc/nrpe.d'
       $nrpe_service     = 'nrpe'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       $nrpe_packages    = [
         'nrpe',
         'nagios-plugins-all',
@@ -71,6 +78,8 @@ class nrpe::params {
       $nrpe_config      = '/usr/local/etc/nrpe.cfg'
       $nrpe_include_dir = '/usr/local/etc/nrpe.d'
       $nrpe_service     = 'nrpe2'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       $nrpe_packages    = [
         'net-mgmt/nrpe',
         'net-mgmt/nagios-plugins',
@@ -84,6 +93,8 @@ class nrpe::params {
       $nrpe_config      = '/etc/nrpe.cfg'
       $nrpe_include_dir = '/etc/nrpe.d'
       $nrpe_service     = 'nrpe'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       $nrpe_packages    = [
         'nrpe',
         'monitoring-plugins',
@@ -95,6 +106,8 @@ class nrpe::params {
       $nrpe_group       = 'nagios'
       $nrpe_pid_file    = '/var/run/nrpe/nrpe.pid'
       $nrpe_service     = 'nrpe'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       case $::operatingsystem {
         'SLES': {
           $nrpe_config      = '/etc/nagios/nrpe.cfg'
@@ -126,6 +139,8 @@ class nrpe::params {
       $nrpe_config      = '/etc/nagios/nrpe.cfg'
       $nrpe_include_dir = '/etc/nagios/nrpe.d'
       $nrpe_service     = 'nrpe'
+      $nrpe_hasstatus   = true
+      $nrpe_pattern     = $nrpe_service
       $nrpe_packages    = [
         'net-analyzer/nrpe',
         'net-analyzer/nagios-plugins',
