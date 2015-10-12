@@ -12,6 +12,7 @@ class nrpe::params {
   }
 
   $nrpe_plugin_file_mode = '0755'
+  $nrpe_hasstatus = true
 
   case $::osfamily {
     'Debian':  {
@@ -22,6 +23,12 @@ class nrpe::params {
       $nrpe_config      = '/etc/nagios/nrpe.cfg'
       $nrpe_include_dir = '/etc/nagios/nrpe.d'
       $nrpe_service     = 'nagios-nrpe-server'
+      case $::operatingsystemmajrelease {
+        /6/: {
+          $nrpe_hasstatus = false
+          $nrpe_pattern   = 'nrpe'
+        }
+      }
       $nrpe_packages    = [
         'nagios-nrpe-server',
         'nagios-plugins',

@@ -30,6 +30,8 @@ class nrpe (
   $purge           = undef,
   $recurse         = undef,
   $service_name    = $nrpe::params::nrpe_service,
+  $hasstatus       = $nrpe::params::nrpe_hasstatus,
+  $pattern         = $nrpe::params::nrpe_pattern,
   $dont_blame_nrpe = $nrpe::params::dont_blame_nrpe,
   $log_facility    = $nrpe::params::log_facility,
   $server_port     = $nrpe::params::server_port,
@@ -55,6 +57,8 @@ class nrpe (
     enable    => true,
     require   => Package[$package_name],
     subscribe => File['nrpe_config'],
+    hasstatus => $hasstatus,
+    pattern   => $pattern,
   }
 
   file { 'nrpe_config':
