@@ -23,7 +23,7 @@ class nrpe::params {
       $nrpe_include_dir = '/etc/nagios/nrpe.d'
       $nrpe_service     = 'nagios-nrpe-server'
       case $::operatingsystemmajrelease {
-        /6/: {
+        /[0-6]/: {
           $nrpe_hasstatus = false
           $nrpe_pattern   = 'nrpe'
         }
